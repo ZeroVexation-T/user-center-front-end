@@ -1,6 +1,8 @@
 // @ts-ignore
 /* eslint-disable */
-import { request } from '@umijs/max';
+// import { request } from '@umijs/max';
+import request from '@/plugins/globalRequest';
+
 
 /** 获取当前的用户 GET /api/user/current */
 export async function currentUser(options?: { [key: string]: any }) {
