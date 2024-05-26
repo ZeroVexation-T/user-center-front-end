@@ -159,7 +159,6 @@ export default () => {
             ? {
               position: position as 'top',
               record: (index, dataSource): API.CurrentUser => ({
-                // id: parseInt((Math.random() * 1000000).toFixed(0)),
                 id: 0,
                 username: '',
                 userAccount: '',
@@ -205,6 +204,10 @@ export default () => {
               // 调用 searchUser 接口获取用户数据
               const response = await searchUser();
               // const userList = await searchUser();
+
+              // TODO 这里怎么接收到的是 undefined ？？？
+              console.log('错误111：' + response.data);
+
               const userList = response.data;
 
               return {
@@ -214,8 +217,10 @@ export default () => {
                   total: userList.length,
                   success: true,
               };
-          } catch (error) {
-            // 如果发生错误，处理错误情况
+          }
+          catch (error) {
+
+              // 如果发生错误，处理错误情况
             console.error("获取数据失败", error);
             return {
               data: [],
