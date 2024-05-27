@@ -8,7 +8,6 @@ import {
 import React, { useState } from 'react';
 import { searchUser } from '@/services/ant-design-pro/api';
 import { Image } from "antd";
-import {result} from "lodash";
 
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
@@ -145,7 +144,8 @@ export default () => {
     },
   ];
 
-  return (
+    // @ts-ignore
+    return (
     <>
       <EditableProTable<API.CurrentUser>
         rowKey="id"
@@ -201,26 +201,17 @@ export default () => {
 
         request={async () => {
           try {
-              // 调用 searchUser 接口获取用户数据
-              const response = await searchUser();
-              // const userList = await searchUser();
-
-              // TODO 这里怎么接收到的是 undefined ？？？
-              console.log('错误111：' + response.data);
-
-              const userList = response.data;
-
-              return {
-                  // 将获取的用户数据设置为表格的 dataSource
-                  data: userList,
-                  // 或者 userList.data, 根据实际返回的数据结构而定
-                  total: userList.length,
-                  success: true,
-              };
-          }
-          catch (error) {
-
-              // 如果发生错误，处理错误情况
+            // 调用 searchUser 接口获取用户数据
+            const response = await searchUser();
+            const userList = response.data || []; // 如果 undefined 就空数组
+            return {
+              // 将获取的用户数据设置为表格的 dataSource
+              data: response,
+              total: userList.length,
+              success: true,
+            };
+          } catch (error) {
+            // 如果发生错误，处理错误情况
             console.error("获取数据失败", error);
             return {
               data: [],
