@@ -1,5 +1,5 @@
 export default {
-  'pages.layouts.userLayout.title': '最好的漫展周边管理',
+  'pages.layouts.userLayout.title': '最好的用户管理中心',
 
   'pages.register.failure': '注册失败，请重试！',
   'pages.register.success': '注册成功！',
